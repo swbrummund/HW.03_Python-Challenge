@@ -7,7 +7,7 @@ csv_path = os.path.join("budget_data.csv")
 def PyBank(Budget):
     Month = 0
     Profit_Losses = []
-    Average_List = []
+    Change_List = []
 
     #Count the number of months
     for row in csv_reader:
@@ -17,39 +17,35 @@ def PyBank(Budget):
         Profit_Losses.append(float(row[1]))
 
         #Add Changes of each month to a list
-        a = row[1]
-        
+        # Ensure variable is defined
+        try:
+            Prev_Month
+        except NameError:
+            Prev_Month = None
 
-        #Greatest Increase in Profits
-        Date_I = row[0]
-        Greatest_Increase = float(row[1])
-        
-        if float(row[1]) > Greatest_Increase:
-            Greatest_Increase = float(row[1])
-            Date_I = row[0]
+        #Find List of monthly changes
+        # Test whether variable is defined to be None
+        if Prev_Month is None:
+            change = 0
+            Prev_Month = float(row[1])
         else:
-            Greatest_Increase = Greatest_Increase
-            Date_I = Date_I
-        
-        #Greatest Decrease in Profits
-        Greatest_Decrease = float(row[1])
-        Date_D = row[0]
-        
-        
-        if float(row[1]) < Greatest_Decrease:
-            Greatest_Decrease = float(row[1])
-            Date_D = row[0]
-        else:
-            Greatest_Decrease = Greatest_Decrease
-            Date_D = Date_D
+            change = float(row[1]) - Prev_Month
+            Change_List.append(change)
+            Prev_Month = float(row[1])
+
+    
 
     #Count Total Profit/Losses
     #Average Change Each Month
     Total_Profit_Losses = sum(Profit_Losses)
-    Average_Change = len(Profit_Losses)/86
+    Average_Change = sum(Change_List)/(Month-1)
+
+    #Find Greatest Increase and Decrease
+    Greatest_Increase = max(Change_List)
+    Greatest_Decrease = min(Change_List)
+    Date_D = 1
+    Date_I = 1
     
-   
-        
 
    
     
