@@ -6,6 +6,7 @@ csv_path = os.path.join("budget_data.csv")
 
 def PyBank(Budget):
     Month = 0
+    Month_List = []
     Profit_Losses = []
     Change_List = []
 
@@ -32,6 +33,7 @@ def PyBank(Budget):
             change = float(row[1]) - Prev_Month
             Change_List.append(change)
             Prev_Month = float(row[1])
+            Month_List.append(row[0])
 
     
 
@@ -43,8 +45,10 @@ def PyBank(Budget):
     #Find Greatest Increase and Decrease
     Greatest_Increase = max(Change_List)
     Greatest_Decrease = min(Change_List)
-    Date_D = 1
-    Date_I = 1
+
+    Monthly_Changes = dict(zip(Change_List,Month_List))
+    Date_I = Monthly_Changes[Greatest_Increase]
+    Date_D = Monthly_Changes[Greatest_Decrease]
     
 
    
