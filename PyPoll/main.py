@@ -23,17 +23,14 @@ with open(csv_path, newline="") as csv_file:
         else:
             Candidates[Candidate_Name] = 1
 
-#Change key name in dictionary
-    Candidates["OTooley"] = Candidates.pop(OTooley)
-
 #Percentage of votes each candidate receieved
     Percent_Khan = ((Candidates['Khan'])/Total_Votes)*100
     Percent_Correy = (Candidates['Correy']/Total_Votes)*100
     Percent_Li = (Candidates['Li']/Total_Votes)*100
-    Percent_OTooley = (Candidates["OTooley"]/Total_Votes)*100
+    Percent_OTooley = (Candidates["O'Tooley"]/Total_Votes)*100
     
 #Winner of election based on popular vote
-    Winner = max(Candidates['Khan'],Candidates['Correy'],Candidates['Li'],Candidates["OTooley"])
+    Winner = max(Candidates['Khan'],Candidates['Correy'],Candidates['Li'],Candidates["O'Tooley"])
 #Print analysis to terminal
 print(f'Election Results')
 print(f'---------------------')
@@ -43,7 +40,22 @@ print(f'{Candidates}')
 print(f'Khan: {Candidates["Khan"]} ({Percent_Khan}%)')
 print(f'Correy: {Candidates["Correy"]} ({Percent_Correy}%)')
 print(f'Li: {Candidates["Li"]} ({Percent_Li}%)')
-print(f"O'Tooley: {Candidates["OTooley"]} ({Percent_OTooley}%)")
+print("O'Tooley: " + str(Candidates["O'Tooley"]) + " (" + str(Percent_OTooley) + "%)")
 print(f'---------------------')
 print(f'Winner: Khan')
+
 #Create a text file with results
+write = open('Election_Results.txt','w+')
+write.write(
+    f"Election Results\n"
+    f"---------------------\n"
+    f'Total Votes: {Total_Votes}\n'
+    f'---------------------\n'
+    f'{Candidates}\n'
+    f'Khan: {Candidates["Khan"]} ({Percent_Khan}%)\n'
+    f'Correy: {Candidates["Correy"]} ({Percent_Correy}%)\n'
+    f'Li: {Candidates["Li"]} ({Percent_Li}%)\n'
+    f"O'Tooley: " + str(Candidates["O'Tooley"]) + " (" + str(Percent_OTooley) + "%)\n"
+    f'---------------------\n'
+    f'Winner: Khan'
+    )    
