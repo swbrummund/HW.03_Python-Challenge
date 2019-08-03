@@ -1,6 +1,5 @@
 import os
 import csv
-from collections import Counter
 
 csv_path = os.path.join("budget_data.csv")
 
